@@ -27,6 +27,16 @@ public class Main {
 
         Moped moped = new Moped();
 
+    }
 
+    public class Number {
+
+        public boolean isEven(double n) {
+            boolean x = false;
+            if (n%2==0){
+                x=true;
+            }
+            return x;  // Your awesome code here!
+        }
     }
 }
