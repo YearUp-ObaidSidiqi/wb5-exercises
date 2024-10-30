@@ -2,7 +2,7 @@ package com.pluralsight;
 
 public class Asset {
     private String description;
-    private String dataAcquired;
+    private String dateAcquired;
     private double originalCost;
 
     public Asset(){
@@ -10,7 +10,7 @@ public class Asset {
 
     public Asset(String description, String dataAcquired, double originalCost) {
         this.description = description;
-        this.dataAcquired = dataAcquired;
+        this.dateAcquired = dataAcquired;
         this.originalCost = originalCost;
     }
     public String getDescription() {
@@ -19,11 +19,11 @@ public class Asset {
     public void setDescription(String description) {
         this.description = description;
     }
-    public String getDataAcquired() {
-        return dataAcquired;
+    public String getDateAcquired() {
+        return dateAcquired;
     }
-    public void setDataAcquired(String dataAcquired) {
-        this.dataAcquired = dataAcquired;
+    public void setDateAcquired(String dateAcquired) {
+        this.dateAcquired = dateAcquired;
     }
     public double getOriginalCost() {
         return originalCost;

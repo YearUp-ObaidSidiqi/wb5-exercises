@@ -8,12 +8,6 @@ public class Home extends Asset {
 
     public Home(){
     }
-    public Home(String address, int condition, int squareFoot, int lotSize) {
-        this.address = address;
-        this.condition = condition;
-        this.squareFoot = squareFoot;
-        this.lotSize = lotSize;
-    }
     public Home(String description, String dataAcquired, double originalCost, String address, int condition, int squareFoot, int lotSize) {
         super(description, dataAcquired, originalCost);
         this.address = address;
@@ -49,24 +43,36 @@ public class Home extends Asset {
 
     @Override
     public double getValue(){
-        switch (condition){
+        /*switch (condition){
             case 1 -> System.out.println("Excellent condition");
             case 2 -> System.out.println("Good condition");
             case 3 -> System.out.println("Fair condition");
             case 4 -> System.out.println("Poor condition");
             default -> System.out.println("-ERROR!-");
-        }
-        double x=0;
+        }*/
+        double value =0;
         switch (condition){
-            case 1 -> x=squareFoot*180;
-            case 2 -> x=squareFoot*130;
-            case 3 -> x=squareFoot*90;
-            case 4 -> x=squareFoot*80;
+            case 1 -> value =squareFoot*180;
+            case 2 -> value =squareFoot*130;
+            case 3 -> value =squareFoot*90;
+            case 4 -> value =squareFoot*80;
             default -> System.out.println("-ERROR!-");
         }
         double lotValue = getLotSize()*.25;
-        return (x*squareFoot)+lotValue;
+        return (value +lotValue);
+    }
+    @Override
+    public String toString() {
+        return "Home         {" +
+                "Description = '" + getDescription() + '\'' +
+                ", Date Acquired = '" + getDateAcquired() + '\'' +
+                ", Original Cost = $" + getOriginalCost() +
+                ", Address = '" + address + '\'' +
+                ", Square Footage = " + squareFoot + " sqft" +
+                ", Lot Size = " + lotSize + " sqft" +
+                ", Current Value = $" + getValue() +
+                '}';
     }
 
+    }
 
-}

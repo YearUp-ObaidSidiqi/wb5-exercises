@@ -3,31 +3,22 @@ package com.pluralsight;
 import java.time.LocalDate;
 
 public class Vehicle extends Asset {
-    private String makeModel;
+    private String make;
+    private String model;
     private int year;
     private int odometer;
 
     public Vehicle(){
 
     }
-    public Vehicle(String makeModel, int year, int odometer) {
-        this.makeModel = makeModel;
-        this.year = year;
-        this.odometer = odometer;
-    }
-    public Vehicle(String description, String dataAcquired, double originalCost, String makeModel, int year, int odometer) {
+    public Vehicle(String description, String dataAcquired, double originalCost, String make, String model, int year, int odometer) {
         super(description, dataAcquired, originalCost);
-        this.makeModel = makeModel;
+        this.make = make;
+        this.model = model;
         this.year = year;
         this.odometer = odometer;
     }
 
-    public String getMakeModel() {
-        return makeModel;
-    }
-    public void setMakeModel(String makeModel) {
-        this.makeModel = makeModel;
-    }
     public int getYear() {
         return year;
     }
@@ -40,22 +31,56 @@ public class Vehicle extends Asset {
     public void setOdometer(int odometer) {
         this.odometer = odometer;
     }
+    public String getMake() {
+        return make;
+    }
+    public void setMake(String make) {
+        this.make = make;
+    }
+    public String getModel() {
+        return model;
+    }
+    public void setModel(String model) {
+        this.model = model;
+    }
 
     @Override
     public double getValue(){
-       int x = (year-LocalDate.now().getYear());
-       double i=0;
-       if (x>=0 && x<=3){
-           i = (super.getOriginalCost()*0.03)*x;
-       }if (x>=4 && x<=6){
-            i = (super.getOriginalCost()*0.06)*x;
-        }if (x>=7 && x<=10){
-            i = (super.getOriginalCost()*0.08)*x;
-        }if (x>=10){
-            i = (super.getOriginalCost()*0.08)*x;
+        int differencesYear =  LocalDate.now().getYear()-year;
+        double originalCost = super.getOriginalCost();
+        System.out.println(differencesYear);
+        double value = 0;
+        /// WOP
+        if (differencesYear >= 0 && differencesYear <= 3) {
+            value = originalCost-(originalCost * 0.03);
+        } else if (differencesYear >= 4 && differencesYear <= 6) {
+            value = originalCost * 0.06 * differencesYear;
+        } else if (differencesYear >= 7 && differencesYear <= 10) {
+            value = originalCost * 0.08 * differencesYear;
+        } else if (differencesYear > 10) {
+            value = 10000;
         }
 
+        if (getOdometer() >= 100000
+            && getMake().equalsIgnoreCase("Honda")
+            && getMake().equalsIgnoreCase("Toyota")){
+            value -= value * 0.25;
+        }
 
-       return i;
+        return value;
     }
+    @Override
+    public String toString() {
+        return "Vehicle      {" +
+                "Description = '" + getDescription() + '\'' +
+                ", Date Acquired = '" + getDateAcquired() + '\'' +
+                ", Original Cost = $" + getOriginalCost() +
+                ", Make = '" + make + '\'' +
+                ", Model = '" + model + '\'' +
+                ", Year = " + year +
+                ", Odometer = " + odometer + " miles" +
+                ", Current Value = $" + getValue() +
+                '}';
+    }
+
 }
