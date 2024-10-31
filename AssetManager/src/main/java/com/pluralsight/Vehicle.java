@@ -49,25 +49,27 @@ public class Vehicle extends Asset {
         int differencesYear =  LocalDate.now().getYear()-year;
         double originalCost = super.getOriginalCost();
         System.out.println(differencesYear);
-        double value = 0;
+        double value=0;
         /// WOP
-        if (differencesYear >= 0 && differencesYear <= 3) {
-            value = originalCost-(originalCost * 0.03);
+        if (differencesYear >= 1 && differencesYear <= 3) {
+
+            originalCost*=Math.pow(0.97,differencesYear);
+
         } else if (differencesYear >= 4 && differencesYear <= 6) {
-            value = originalCost * 0.06 * differencesYear;
+            originalCost = originalCost * 0.06 * differencesYear;
         } else if (differencesYear >= 7 && differencesYear <= 10) {
-            value = originalCost * 0.08 * differencesYear;
+            originalCost = originalCost * 0.08 * differencesYear;
         } else if (differencesYear > 10) {
-            value = 10000;
+            originalCost = 10000;
         }
 
         if (getOdometer() >= 100000
             && getMake().equalsIgnoreCase("Honda")
             && getMake().equalsIgnoreCase("Toyota")){
-            value -= value * 0.25;
+            originalCost -= originalCost * 0.25;
         }
 
-        return value;
+        return originalCost;
     }
     @Override
     public String toString() {
